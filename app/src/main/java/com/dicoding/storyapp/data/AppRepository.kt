@@ -12,7 +12,6 @@ import com.dicoding.storyapp.data.remote.response.StoryUploadResponse
 import com.dicoding.storyapp.data.remote.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
@@ -116,8 +115,8 @@ class AppRepository(
         }
     }
 
-    fun getAllStoriesWidget(): Results<List<ListStoryItem>> = runBlocking {
-        try {
+    suspend fun getAllStoriesWidget(): Results<List<ListStoryItem>> {
+        return try {
             val token = pref.getToken().first()
             val response = apiService.getAllStories(
                 token = "Bearer $token",
@@ -130,6 +129,7 @@ class AppRepository(
             Results.Error(e.message.toString())
         }
     }
+
 
 
     companion object {

@@ -28,23 +28,21 @@ class StackRemoteViewsFactory(private val context: Context) : RemoteViewsService
     override fun onDataSetChanged() {
         Log.d("StackRemoteViewsFactory Widget", "onDataSetChanged called")
         runBlocking {
-            val result = repository.getAllStoriesWidget()
-            result.let {
-                when (it) {
-                    is Results.Success -> {
-                        storyItems.clear()
-                        storyItems.addAll(it.data)
-                        Log.d("StackRemoteViewsFactory", "Data size: ${storyItems.size}")
-                    }
-                    is Results.Error -> {
-                        storyItems.clear()
-                        Log.d("StackRemoteViewsFactory", "Error: ${it.error}")
-                    }
-                    is Results.Loading -> TODO()
+            when (val result = repository.getAllStoriesWidget()) {
+                is Results.Success -> {
+                    storyItems.clear()
+                    storyItems.addAll(result.data)
+                    Log.d("StackRemoteViewsFactory", "Data size: ${storyItems.size}")
                 }
+                is Results.Error -> {
+                    storyItems.clear()
+                    Log.d("StackRemoteViewsFactory", "Error: ${result.error}")
+                }
+                is Results.Loading -> { TODO()}
             }
         }
     }
+
 
     override fun onDestroy() {
         storyItems.clear()
