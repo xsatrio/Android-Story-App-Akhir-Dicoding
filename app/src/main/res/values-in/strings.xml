@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="title_welcome_page">Selamat datang di Aplikasi Story Dicoding</string>
+    <string name="login">Login</string>
+    <string name="signup">Daftar</string>
+    <string name="name">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="mediaCover">ImageView</string>
+    <string name="error">Kesalahan Id / Token</string>
+    <string name="menu_1">Logout</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="camera">Kamera</string>
+    <string name="description">Deskripsi</string>
+    <string name="app_widget_description">Ini adalah deskripsi aplikasi widget</string>
+    <string name="permission_request_granted">Perizinan diterima</string>
+    <string name="permission_request_denied">Perizinan ditolak</string>
+    <string name="empty_description">Deskripsi kosong</string>
+    <string name="empty_image">Silahkan pilih atau ambil gambar terlebih dahulu</string>
+    <string name="failed_take_picture">Gagal mengambil gambar</string>
+    <string name="failed_show_camera_preview">Gagal membuka kamera</string>
+    <string name="invalid_email">Format email salah</string>
+    <string name="name_empty_error">Nama tidak boleh kosong</string>
+    <string name="password_length_error">Kata sandi minimal 8 karakter</string>
+    <string name="logout_success">Berhasil Logout</string>
+    <string name="login_success">Berhasil Login</string>
+    <string name="register_success">Registrasi berhasil</string>
+    <string name="register_error">Registrasi gagal : </string>
+    <string name="add_story">Tambah cerita</string>
+    <string name="empty_view_text">Login terlebih dahulu</string>
+    <string name="login_button">Login</string>
+    <string name="message_welcome_page">Ayo unggah ceritamu ke Aplikasi Story Dicoding</string>
+    <string name="menu_2">Bahasa</string>
+    <string name="imageView">Gambar</string>
+    <string name="author">"Nama : "</string>
+    <string name="created_at">"Di unggah pada : "</string>
+    <string name="upload_success">Story berhasil di unggah</string>
+    <string name="cameraSwitch">Switch camera</string>
+</resources>

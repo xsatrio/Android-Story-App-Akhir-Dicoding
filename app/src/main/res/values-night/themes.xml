@@ -1,0 +1,13 @@
+<resources>
+    <style name="Base.Theme.StoryApp" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/PrimaryDark</item>
+        <item name="android:statusBarColor">@color/PrimaryDark</item>
+        <item name="android:navigationBarColor">@color/PrimaryDark</item>
+    </style>
+
+    <style name="Base.Theme.StoryApp.Landing" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/PrimaryDark</item>
+        <item name="android:statusBarColor">@color/PrimaryDark</item>
+        <item name="android:navigationBarColor">@color/PrimaryDark</item>
+    </style>
+</resources>
