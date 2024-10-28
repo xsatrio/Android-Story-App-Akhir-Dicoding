@@ -9,7 +9,7 @@
     <string name="password">Kata Sandi</string>
     <string name="mediaCover">ImageView</string>
     <string name="error">Kesalahan Id / Token</string>
-    <string name="menu_1">Logout</string>
+    <string name="logout">Logout</string>
     <string name="gallery">Galeri</string>
     <string name="upload">Unggah</string>
     <string name="camera">Kamera</string>
@@ -32,10 +32,11 @@
     <string name="empty_view_text">Login terlebih dahulu</string>
     <string name="login_button">Login</string>
     <string name="message_welcome_page">Ayo unggah ceritamu ke Aplikasi Story Dicoding</string>
-    <string name="menu_2">Bahasa</string>
+    <string name="language">Bahasa</string>
     <string name="imageView">Gambar</string>
     <string name="author">"Nama : "</string>
     <string name="created_at">"Di unggah pada : "</string>
     <string name="upload_success">Story berhasil di unggah</string>
     <string name="cameraSwitch">Switch camera</string>
+    <string name="map">Peta</string>
 </resources>

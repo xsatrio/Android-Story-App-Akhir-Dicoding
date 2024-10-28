@@ -17,7 +17,6 @@ import okhttp3.RequestBody
 import retrofit2.HttpException
 import java.io.IOException
 
-@Suppress("RunBlocking")
 class AppRepository(
     private val apiService: ApiService,
     private val pref: UserPref

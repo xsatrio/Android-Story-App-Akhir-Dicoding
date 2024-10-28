@@ -8,7 +8,7 @@
     <string name="password">Password</string>
     <string name="mediaCover">ImageView</string>
     <string name="error">Invalid Id / Token</string>
-    <string name="menu_1">Logout</string>
+    <string name="logout">Logout</string>
     <string name="gallery">Gallery</string>
     <string name="upload">Upload</string>
     <string name="camera">Camera</string>
@@ -31,10 +31,11 @@
     <string name="empty_view_text">Login first</string>
     <string name="login_button">Login</string>
     <string name="message_welcome_page">Let\'s upload your stories to Story App Dicoding</string>
-    <string name="menu_2">Language</string>
+    <string name="language">Language</string>
     <string name="imageView">Image</string>
     <string name="author">"Name : "</string>
     <string name="created_at">"Upload at : "</string>
     <string name="upload_success">Uploaded story success</string>
     <string name="cameraSwitch">Switch camera</string>
+    <string name="map">Map</string>
 </resources>
