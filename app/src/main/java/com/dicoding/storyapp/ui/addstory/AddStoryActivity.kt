@@ -153,8 +153,9 @@ class AddStoryActivity : AppCompatActivity() {
                 photoRequestBody
             )
 
-        val lat = lat.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val lon = lon.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val lat = lat?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+        val lon = lon?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+        Log.d("Location", "Lat: $lat, Lon: $lon")
 
         viewModel.uploadStory(descriptionReqBody, photoMultipart, lat, lon)
     }
