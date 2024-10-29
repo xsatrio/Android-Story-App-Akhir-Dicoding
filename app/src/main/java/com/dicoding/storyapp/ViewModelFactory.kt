@@ -11,6 +11,7 @@ import com.dicoding.storyapp.ui.addstory.AddStoryViewModel
 import com.dicoding.storyapp.ui.detail.DetailViewModel
 import com.dicoding.storyapp.ui.home.HomeViewModel
 import com.dicoding.storyapp.ui.login.LoginViewModel
+import com.dicoding.storyapp.ui.maps.MapsViewModel
 import com.dicoding.storyapp.ui.register.RegisterViewModel
 
 val Context.dataStore by preferencesDataStore(name = "user_preferences")
@@ -35,6 +36,9 @@ class ViewModelFactory(private val repository: AppRepository, preferences: UserP
             }
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

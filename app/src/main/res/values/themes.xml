@@ -4,12 +4,14 @@
         <item name="colorPrimary">@color/Primary</item>
         <item name="android:statusBarColor">@color/Primary</item>
         <item name="android:navigationBarColor">@color/Primary</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
     </style>
 
     <style name="Base.Theme.StoryApp.Landing" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/Primary</item>
         <item name="android:statusBarColor">@color/Primary</item>
         <item name="android:navigationBarColor">@color/Primary</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
     </style>
 
     <style name="Theme.StoryApp" parent="Base.Theme.StoryApp" />
@@ -27,5 +29,14 @@
     <style name="Theme.StoryApp.AppWidgetContainer" parent="Theme.StoryApp.AppWidgetContainerParent">
         <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
         <item name="appWidgetPadding">16dp</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorSurfaceVariant">#8489AF</item>
     </style>
 </resources>

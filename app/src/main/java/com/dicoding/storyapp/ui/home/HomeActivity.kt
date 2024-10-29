@@ -6,11 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +22,7 @@ import com.dicoding.storyapp.databinding.ActivityHomeBinding
 import com.dicoding.storyapp.ui.adapter.StoriesAdapter
 import com.dicoding.storyapp.ui.addstory.AddStoryActivity
 import com.dicoding.storyapp.ui.main.MainActivity
+import com.dicoding.storyapp.ui.maps.MapsActivity
 import com.dicoding.storyapp.widget.StoryAppWidget
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
@@ -45,12 +44,14 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.map -> {
-                val snack: Snackbar = Snackbar.make(binding.root, "Segera hadir / Coming soon", Snackbar.LENGTH_LONG)
-                val view = snack.view
-                val params = view.layoutParams as FrameLayout.LayoutParams
-                params.gravity = Gravity.TOP
-                view.layoutParams = params
-                snack.show()
+//                val snack: Snackbar = Snackbar.make(binding.root, "Segera hadir / Coming soon", Snackbar.LENGTH_LONG)
+//                val view = snack.view
+//                val params = view.layoutParams as FrameLayout.LayoutParams
+//                params.gravity = Gravity.TOP
+//                view.layoutParams = params
+//                snack.show()
+                intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
                 true
             }
             R.id.language -> {

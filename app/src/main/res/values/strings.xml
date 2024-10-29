@@ -38,4 +38,5 @@
     <string name="upload_success">Uploaded story success</string>
     <string name="cameraSwitch">Switch camera</string>
     <string name="map">Map</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

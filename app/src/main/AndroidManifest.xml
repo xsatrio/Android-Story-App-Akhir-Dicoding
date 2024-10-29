@@ -11,6 +11,9 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDpteHeJL3pUG0AWadqzmEQXcQAs9unxhc" />
+
+        <activity
+            android:name=".ui.maps.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+
         <receiver
             android:name=".widget.StoryAppWidget"
             android:exported="false">
@@ -35,16 +47,16 @@
 
         <service
             android:name=".widget.StackWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"
-            android:exported="false">
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/story_app_widget_info" />
         </service>
-
 
         <activity
             android:name=".ui.addstory.CameraActivity"
@@ -59,15 +71,15 @@
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.StoryApp.Landing"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity"
-            android:screenOrientation="portrait" />
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.StoryApp.Landing"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity"
-            android:screenOrientation="portrait" />
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"

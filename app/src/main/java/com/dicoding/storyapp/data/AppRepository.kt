@@ -129,6 +129,19 @@ class AppRepository(
         }
     }
 
+    fun getAllStoriesWithLoc(): LiveData<Results<List<ListStoryItem>>> = liveData {
+        emit(Results.Loading)
+        try {
+            val token = pref.getToken().first()
+            val response = apiService.getStoriesWithLocation(
+                token = "Bearer $token",
+                location = 1
+            )
+            emit(Results.Success(response.listStory))
+        } catch (e: Exception) {
+            emit(Results.Error(e.message.toString()))
+        }
+    }
 
 
     companion object {

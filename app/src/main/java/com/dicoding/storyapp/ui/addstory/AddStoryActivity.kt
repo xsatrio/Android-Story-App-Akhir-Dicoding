@@ -3,6 +3,7 @@ package com.dicoding.storyapp.ui.addstory
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,9 @@ import com.dicoding.storyapp.helper.reduceFileImage
 import com.dicoding.storyapp.helper.uriToFile
 import com.dicoding.storyapp.ui.addstory.CameraActivity.Companion.CAMERAX_RESULT
 import com.dicoding.storyapp.ui.home.HomeActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -31,6 +35,12 @@ import okhttp3.RequestBody.Companion.toRequestBody
 class AddStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStoryBinding
     private var currentImageUri: Uri? = null
+    private lateinit var materialSwitch: MaterialSwitch
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private var lat: Double? = null
+    private var lon: Double? = null
+
     private val viewModel by viewModels<AddStoryViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -56,11 +66,19 @@ class AddStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        viewModel.imageUri.observe(this) { uri ->
-            if (uri != null) {
-                currentImageUri = uri
-                showImage()
+        materialSwitch = binding.locationSwitch
+
+        materialSwitch.isChecked = false
+        materialSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                Toast.makeText(this, "Location On", Toast.LENGTH_SHORT).show()
+                getLocation()
+            } else {
+                Toast.makeText(this, "Location Off", Toast.LENGTH_SHORT).show()
+                lat = null
+                lon = null
             }
         }
 
@@ -95,6 +113,23 @@ class AddStoryActivity : AppCompatActivity() {
         binding.uploadBtn.setOnClickListener { uploadImage() }
     }
 
+    private fun getLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    lat = location.latitude
+                    lon = location.longitude
+                    Toast.makeText(this, "Location Success", Toast.LENGTH_SHORT).show()
+                    Log.d("Location", "Lat: $lat, Lon: $lon")
+                } else {
+                    Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
     private fun uploadImage() {
         val description = binding.descriptionEdt.text.toString()
         if (description.isEmpty()) {
@@ -118,8 +153,8 @@ class AddStoryActivity : AppCompatActivity() {
                 photoRequestBody
             )
 
-        val lat = null
-        val lon = null
+        val lat = lat.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val lon = lon.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         viewModel.uploadStory(descriptionReqBody, photoMultipart, lat, lon)
     }
@@ -169,6 +204,7 @@ class AddStoryActivity : AppCompatActivity() {
             showImage()
         }
     }
+
 
     private fun showLoading(b: Boolean) {
         binding.progressIndicator.visibility = if (b) View.VISIBLE else View.GONE

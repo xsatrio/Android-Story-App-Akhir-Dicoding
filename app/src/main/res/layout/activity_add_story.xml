@@ -32,6 +32,45 @@
         app:srcCompat="@drawable/ic_image"
         tools:src="@tools:sample/avatars" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/addLocationTv"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="8dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:layout_marginBottom="8dp"-->
+    <!--        android:text="Tambahkan lokasi"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal3"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/imageView2"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />-->
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/locationSwitch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:checked="false"
+        android:text="Tambahkan lokasi"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
@@ -62,13 +101,13 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/black"
         android:text="@string/camera"
-        app:icon="@drawable/ic_camera"
-        app:iconTint="@color/white"
-        app:iconGravity="textStart"
         android:textColor="@color/white"
+        app:icon="@drawable/ic_camera"
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/galleryBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal2" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal3" />
 
     <Button
         android:id="@+id/galleryBtn"
@@ -79,13 +118,13 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/black"
         android:text="@string/gallery"
-        app:icon="@drawable/ic_gallery"
-        app:iconTint="@color/white"
-        app:iconGravity="textStart"
         android:textColor="@color/white"
+        app:icon="@drawable/ic_gallery"
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cameraBtn"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal3" />
 
     <Button
         android:id="@+id/uploadBtn"
@@ -96,10 +135,10 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/black"
         android:text="@string/upload"
-        app:icon="@drawable/ic_upload"
-        app:iconTint="@color/white"
-        app:iconGravity="textStart"
         android:textColor="@color/white"
+        app:icon="@drawable/ic_upload"
+        app:iconGravity="textStart"
+        app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cameraBtn" />
@@ -119,7 +158,16 @@
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.65"
+        app:layout_constraintGuide_percent="0.6"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal3"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.69"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
