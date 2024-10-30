@@ -6,7 +6,7 @@
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
     </style>
 
-    <style name="Base.Theme.StoryApp.Landing" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.StoryApp.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/PrimaryDark</item>
         <item name="android:statusBarColor">@color/PrimaryDark</item>
         <item name="android:navigationBarColor">@color/PrimaryDark</item>

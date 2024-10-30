@@ -73,10 +73,10 @@ class AddStoryActivity : AppCompatActivity() {
         materialSwitch.isChecked = false
         materialSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                Toast.makeText(this, "Location On", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.location_on_switch_on, Toast.LENGTH_SHORT).show()
                 getLocation()
             } else {
-                Toast.makeText(this, "Location Off", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.location_on_switch_off, Toast.LENGTH_SHORT).show()
                 lat = null
                 lon = null
             }
@@ -119,10 +119,9 @@ class AddStoryActivity : AppCompatActivity() {
                 if (location != null) {
                     lat = location.latitude
                     lon = location.longitude
-                    Toast.makeText(this, "Location Success", Toast.LENGTH_SHORT).show()
-                    Log.d("Location", "Lat: $lat, Lon: $lon")
+                    Toast.makeText(this, R.string.location_succes, Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.location_failed, Toast.LENGTH_SHORT).show()
                 }
             }
         } else {
@@ -155,7 +154,6 @@ class AddStoryActivity : AppCompatActivity() {
 
         val lat = lat?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
         val lon = lon?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-        Log.d("Location", "Lat: $lat, Lon: $lon")
 
         viewModel.uploadStory(descriptionReqBody, photoMultipart, lat, lon)
     }

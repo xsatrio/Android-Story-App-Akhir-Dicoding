@@ -3,7 +3,11 @@ package com.dicoding.storyapp.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.dicoding.storyapp.data.pref.UserPref
+import androidx.paging.*
+import com.dicoding.storyapp.data.local.database.StoryDatabase
+import com.dicoding.storyapp.data.local.database.StoryEntity
+import com.dicoding.storyapp.data.local.pref.UserPref
+import com.dicoding.storyapp.data.remote.StoriesRemoteMediator
 import com.dicoding.storyapp.data.remote.response.ListStoryItem
 import com.dicoding.storyapp.data.remote.response.LoginResponse
 import com.dicoding.storyapp.data.remote.response.RegisterResponse
@@ -19,8 +23,10 @@ import java.io.IOException
 
 class AppRepository(
     private val apiService: ApiService,
-    private val pref: UserPref
+    private val pref: UserPref,
+    private val database: StoryDatabase,
 ) {
+
     suspend fun login(email: String, password: String): Results<LoginResponse> {
         return try {
             val response = apiService.login(email, password)
@@ -51,20 +57,16 @@ class AppRepository(
         }
     }
 
-    fun getAllStories(): LiveData<Results<List<ListStoryItem>>> = liveData {
-        emit(Results.Loading)
-        try {
-            val token = pref.getToken().first()
-            val response = apiService.getAllStories(
-                token = "Bearer $token",
-                page = null,
-                size = null,
-                location = 0
-            )
-            emit(Results.Success(response.listStory))
-        } catch (e: Exception) {
-            emit(Results.Error(e.message.toString()))
-        }
+    fun getPagingStories(): LiveData<PagingData<StoryEntity>> = liveData {
+        val token = pref.getToken().first()
+        @OptIn(ExperimentalPagingApi::class)
+        emitSource(
+            Pager(
+                config = PagingConfig(pageSize = 5),
+                remoteMediator = token?.let { StoriesRemoteMediator(database, apiService, it) },
+                pagingSourceFactory = { database.storyDao().getAllStory() }
+            ).liveData
+        )
     }
 
     fun getDetailStory(storyId: String): LiveData<Results<Story>> = liveData {
@@ -143,16 +145,16 @@ class AppRepository(
         }
     }
 
-
     companion object {
         @Volatile
         private var instance: AppRepository? = null
         fun getInstance(
             apiService: ApiService,
-            pref: UserPref
+            pref: UserPref,
+            database: StoryDatabase,
         ): AppRepository =
             instance ?: synchronized(this) {
-                instance ?: AppRepository(apiService, pref)
+                instance ?: AppRepository(apiService, pref, database)
             }.also { instance = it }
     }
 }

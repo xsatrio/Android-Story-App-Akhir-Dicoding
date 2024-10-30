@@ -39,4 +39,10 @@
     <string name="upload_success">Story berhasil di unggah</string>
     <string name="cameraSwitch">Switch camera</string>
     <string name="map">Peta</string>
+    <string name="location_on_switch_on">Lokasi Menyala</string>
+    <string name="location_on_switch_off">Lokasi Mati</string>
+    <string name="location_succes">Berhasil mendapatkan lokasi</string>
+    <string name="location_failed">Gagal mendapatkan lokasi/Nyalakan GPS</string>
+    <string name="retry">Coba lagi</string>
+    <string name="error_loading_data">Kesalahan saat memuat data</string>
 </resources>

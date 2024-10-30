@@ -6,13 +6,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp"
         tools:targetApi="31">
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDpteHeJL3pUG0AWadqzmEQXcQAs9unxhc" />
@@ -31,7 +33,46 @@
         <activity
             android:name=".ui.maps.MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/Base.Theme.StoryApp.NoActionBar" />
+
+
+        <activity
+            android:name=".ui.addstory.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.addstory.AddStoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.StoryApp" />
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.StoryApp.NoActionBar"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.StoryApp.NoActionBar"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.StoryApp" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.StoryApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".widget.StoryAppWidget"
@@ -58,42 +99,6 @@
                 android:resource="@xml/story_app_widget_info" />
         </service>
 
-        <activity
-            android:name=".ui.addstory.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.addstory.AddStoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.detail.DetailActivity"
-            android:exported="false"
-            android:theme="@style/Base.Theme.StoryApp" />
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Base.Theme.StoryApp.Landing"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Base.Theme.StoryApp.Landing"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false"
-            android:theme="@style/Base.Theme.StoryApp" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/Base.Theme.StoryApp.Landing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

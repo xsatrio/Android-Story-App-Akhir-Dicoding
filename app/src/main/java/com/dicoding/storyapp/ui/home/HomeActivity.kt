@@ -12,13 +12,14 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.storyapp.R
 import com.dicoding.storyapp.ViewModelFactory
-import com.dicoding.storyapp.data.Results
-import com.dicoding.storyapp.data.pref.UserPref
+import com.dicoding.storyapp.data.local.pref.UserPref
 import com.dicoding.storyapp.dataStore
 import com.dicoding.storyapp.databinding.ActivityHomeBinding
+import com.dicoding.storyapp.ui.adapter.LoadingStateAdapter
 import com.dicoding.storyapp.ui.adapter.StoriesAdapter
 import com.dicoding.storyapp.ui.addstory.AddStoryActivity
 import com.dicoding.storyapp.ui.main.MainActivity
@@ -44,21 +45,17 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.map -> {
-//                val snack: Snackbar = Snackbar.make(binding.root, "Segera hadir / Coming soon", Snackbar.LENGTH_LONG)
-//                val view = snack.view
-//                val params = view.layoutParams as FrameLayout.LayoutParams
-//                params.gravity = Gravity.TOP
-//                view.layoutParams = params
-//                snack.show()
                 intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
                 true
             }
+
             R.id.language -> {
                 val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(intent)
                 true
             }
+
             R.id.logout -> {
                 lifecycleScope.launch {
                     val userPref = UserPref.getInstance(dataStore)
@@ -75,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -96,32 +94,45 @@ class HomeActivity : AppCompatActivity() {
 
         binding.rvStory.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = storyAdapter
+            adapter = storyAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter { storyAdapter.retry() }
+            )
         }
     }
 
     private fun observeViewModel() {
-        viewModel.getAllStories.observe(this) { result ->
-            when (result) {
-                is Results.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Results.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    storyAdapter.submitList(result.data)
-                }
-                is Results.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    Snackbar.make(binding.root, "Error: ${result.error}", Snackbar.LENGTH_SHORT)
-                        .show()
-                }
+        viewModel.getAllStories.observe(this) {
+            storyAdapter.submitData(lifecycle, it)
+        }
+
+        storyAdapter.addLoadStateListener { loadState ->
+            binding.progressBar.visibility = if (loadState.refresh is LoadState.Loading && storyAdapter.itemCount == 0) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+
+            if (loadState.refresh is LoadState.Error) {
+
+                val error = (loadState.refresh as LoadState.Error).error
+                Snackbar.make(binding.root, error.localizedMessage ?: getString(R.string.error_loading_data), Snackbar.LENGTH_INDEFINITE)
+                    .setAction(getString(R.string.retry)) {
+                        storyAdapter.retry()
+                    }
+                    .show()
+            } else {
+                binding.errorTextView.visibility = View.GONE
             }
         }
     }
+
 
     private fun updateWidget() {
         val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
             ComponentName(application, StoryAppWidget::class.java)
         )
-        AppWidgetManager.getInstance(application).notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
+        AppWidgetManager.getInstance(application)
+            .notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
         Log.d("Loginctivity", "Widget IDs: ${ids.joinToString()}")
         val intent = Intent(this, StoryAppWidget::class.java).apply {
             action = AppWidgetManager.ACTION_APPWIDGET_UPDATE

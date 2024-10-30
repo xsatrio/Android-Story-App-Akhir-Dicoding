@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.storyapp.R
-import com.dicoding.storyapp.data.pref.UserPref
+import com.dicoding.storyapp.data.local.pref.UserPref
 import com.dicoding.storyapp.databinding.ActivityMainBinding
 import com.dicoding.storyapp.ui.home.HomeActivity
 import com.dicoding.storyapp.ui.login.LoginActivity

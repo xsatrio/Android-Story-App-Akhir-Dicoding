@@ -38,5 +38,11 @@
     <string name="upload_success">Uploaded story success</string>
     <string name="cameraSwitch">Switch camera</string>
     <string name="map">Map</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+    <string name="location_on_switch_on">Location On</string>
+    <string name="location_on_switch_off">Location Off</string>
+    <string name="location_succes">Location Succes</string>
+    <string name="location_failed">Unable to get location/Turn on your GPS</string>
+    <string name="retry">Try again</string>
+    <string name="error_loading_data">Error loading data</string>
 </resources>

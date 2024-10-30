@@ -5,7 +5,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyapp.data.AppRepository
-import com.dicoding.storyapp.data.pref.UserPref
+import com.dicoding.storyapp.data.local.pref.UserPref
 import com.dicoding.storyapp.di.Injection
 import com.dicoding.storyapp.ui.addstory.AddStoryViewModel
 import com.dicoding.storyapp.ui.detail.DetailViewModel
