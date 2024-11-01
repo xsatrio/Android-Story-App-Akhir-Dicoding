@@ -58,7 +58,6 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.androidx.espresso.idling.resource)
     testImplementation(libs.junit)
-    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.espresso.intents)

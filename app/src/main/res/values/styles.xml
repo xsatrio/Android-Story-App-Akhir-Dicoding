@@ -1,5 +1,5 @@
 <resources>
 
-    <style name="Widget.StoryApp.AppWidget.Container" parent="android:Widget"></style>
+    <style name="Widget.StoryApp.AppWidget.Container" parent="android:Widget" />
 
 </resources>

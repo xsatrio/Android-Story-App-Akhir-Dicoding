@@ -45,4 +45,5 @@
     <string name="location_failed">Gagal mendapatkan lokasi/Nyalakan GPS</string>
     <string name="retry">Coba lagi</string>
     <string name="error_loading_data">Kesalahan saat memuat data</string>
+    <string name="add_location">Tambahkan Lokasi</string>
 </resources>

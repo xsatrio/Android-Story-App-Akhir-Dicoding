@@ -82,6 +82,13 @@ class AddStoryActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.imageUri.observe(this) { uri ->
+            if (uri != null) {
+                currentImageUri = uri
+                showImage()
+            }
+        }
+
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
         }
