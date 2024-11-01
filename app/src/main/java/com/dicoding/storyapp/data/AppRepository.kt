@@ -14,6 +14,7 @@ import com.dicoding.storyapp.data.remote.response.RegisterResponse
 import com.dicoding.storyapp.data.remote.response.Story
 import com.dicoding.storyapp.data.remote.response.StoryUploadResponse
 import com.dicoding.storyapp.data.remote.retrofit.ApiService
+import com.dicoding.storyapp.helper.wrapAppIdlingResource
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.first
 import okhttp3.MultipartBody
@@ -28,15 +29,17 @@ class AppRepository(
 ) {
 
     suspend fun login(email: String, password: String): Results<LoginResponse> {
-        return try {
-            val response = apiService.login(email, password)
-            Results.Success(response)
-        } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, LoginResponse::class.java)
-            Results.Error(errorBody.message.toString())
-        } catch (e: Exception) {
-            Results.Error(e.message ?: "An error occurred")
+        return wrapAppIdlingResource {
+            try {
+                val response = apiService.login(email, password)
+                Results.Success(response)
+            } catch (e: HttpException) {
+                val jsonInString = e.response()?.errorBody()?.string()
+                val errorBody = Gson().fromJson(jsonInString, LoginResponse::class.java)
+                Results.Error(errorBody.message.toString())
+            } catch (e: Exception) {
+                Results.Error(e.message ?: "An error occurred")
+            }
         }
     }
 

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         playAnimation()
 
-        binding.loginButton.setOnClickListener {
+        binding.loginButtonLanding.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 

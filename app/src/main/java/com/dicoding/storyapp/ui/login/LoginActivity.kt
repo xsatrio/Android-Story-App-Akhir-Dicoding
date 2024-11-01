@@ -21,12 +21,13 @@ import com.dicoding.storyapp.ui.customview.LoginButton
 import com.dicoding.storyapp.ui.customview.PasswordEditText
 import com.dicoding.storyapp.ui.home.HomeActivity
 import com.dicoding.storyapp.widget.StoryAppWidget
+import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginButton: LoginButton
-    private lateinit var emailEditText: EmailEditText
-    private lateinit var passwordEditText: PasswordEditText
+    private lateinit var emailEditTextLogin: EmailEditText
+    private lateinit var passwordEditTextLogin: PasswordEditText
     private val viewModel by viewModels<LoginViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -39,14 +40,13 @@ class LoginActivity : AppCompatActivity() {
         playAnimation()
 
         loginButton = binding.loginButton
-        emailEditText = binding.emailEditText
-        passwordEditText = binding.passwordEditText
+        emailEditTextLogin = binding.emailEditTextLogin
+        passwordEditTextLogin = binding.passwordEditTextLogin
 
         loginButton.isEnabled = false
 
-        emailEditText.addTextChangedListener(loginTextWatcher)
-        passwordEditText.addTextChangedListener(loginTextWatcher)
-
+        emailEditTextLogin.addTextChangedListener(loginTextWatcher)
+        passwordEditTextLogin.addTextChangedListener(loginTextWatcher)
         setupListeners()
     }
 
@@ -61,8 +61,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun validateFields() {
-        val email = emailEditText.text.toString()
-        val password = passwordEditText.text.toString()
+        val email = emailEditTextLogin.text.toString()
+        val password = passwordEditTextLogin.text.toString()
 
         val isEmailValid =
             email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -74,8 +74,8 @@ class LoginActivity : AppCompatActivity() {
     private fun setupListeners() {
 
         binding.loginButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+            val email = binding.emailEditTextLogin.text.toString()
+            val password = binding.passwordEditTextLogin.text.toString()
 
             showLoading(true)
 
@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }, onError = { errorMessage ->
                 showLoading(false)
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_SHORT).show()
             })
         }
     }
